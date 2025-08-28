@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Random Smashdown [Flask]</title>
+    <link rel="stylesheet" href="../static/style.css">
+</head>
+<body>
+    <h1>Random Smashdown [Flask]</h1>
+    {% if selected %}
+        <div>
+            <img src="{{  selected.icon  }}" alt="{{ selected.name }}" width="70">
+            <h2>{{ selected.name }}</h2>
+        </div>
+    {% elif message %}
+        <h2>{{ message }}</h2>
+    {% else %}
+        <h2>Click the button to select a fighter!</h2>
+    {% endif %}
+
+    {% if remaining %}
+        <form method="post">
+            <button type="submit">Randomize</button>
+        </form>
+    {% endif %}
+
+    <form action="{{ url_for('reset') }}">
+        <button type="submit">Reset</button>
+    </form>
+
+    <h3>History:</h3>
+    <div class="history">
+        {% for fighter in history %}
+            <img src="{{  fighter.icon  }}" alt="{{ fighter.name }}" width="40">
+        {% endfor %}
+    </div>
+</body>
+</html>

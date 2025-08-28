@@ -1,10 +1,3 @@
-from flask import Flask, render_template_string, redirect, url_for, session
-import random
-from waitress import serve
-
-app = Flask(__name__)
-app.secret_key = 'your_secret_key'
-
 fighters = [
     {"id": 1, "name": "Mario", "icon": "https://www.ssbwiki.com/images/0/0d/MarioHeadSSBU.png"},
     {"id": 2, "name": "Donkey Kong", "icon": "https://www.ssbwiki.com/images/b/ba/DonkeyKongHeadSSBU.png"},
@@ -93,64 +86,3 @@ fighters = [
     {"id": 85, "name": "Kazuya", "icon": "https://www.ssbwiki.com/images/6/67/KazuyaHeadSSBU.png"},
     {"id": 86, "name": "Sora", "icon": "https://www.ssbwiki.com/images/0/0e/SoraHeadSSBU.png"}
 ]
-
-TEMPLATE = '''
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Random Smashdown</title>
-    <style>
-        body { background: #888; color: #fff; font-family: Arial; text-align: center; }
-        .fighter-img { width: 90px; height: 90px; }
-        .btn { margin: 10px; padding: 10px 20px; font-size: 16px; }
-        .question { font-size: 80px; margin: 40px 0; }
-    </style>
-</head>
-<body>
-    {% if fighter is none and fighters_left %}
-        <div class="question">?</div>
-    {% elif fighter %}
-        <h1>{{ fighter.name }}</h1>
-        <img src="{{ fighter.icon }}" class="fighter-img"><br>
-    {% else %}
-        <h1>No fighters left!</h1>
-    {% endif %}
-    <form method="post" action="/action">
-        <button class="btn" name="action" value="continue">Continue</button>
-        <button class="btn" name="action" value="reset">Reset</button>
-        <button class="btn" name="action" value="end">End</button>
-    </form>
-</body>
-</html>
-'''
-
-@app.route('/', methods=['GET'])
-def index():
-    if 'fighters' not in session:
-        session['fighters'] = fighters.copy()
-        session['current_fighter'] = None
-    fighters_left = bool(session['fighters'])
-    fighter = session.get('current_fighter')
-    return render_template_string(TEMPLATE, fighter=fighter, fighters_left=fighters_left)
-
-@app.route('/action', methods=['POST'])
-def action():
-    from flask import request
-    action = request.form['action']
-    if action == 'continue':
-        if session['fighters']:
-            fighter = random.choice(session['fighters'])
-            session['fighters'].remove(fighter)
-            session['current_fighter'] = fighter
-        else:
-            session['current_fighter'] = None
-    elif action == 'reset':
-        session['fighters'] = fighters.copy()
-        session['current_fighter'] = None
-    elif action == 'end':
-        session['fighters'] = []
-        session['current_fighter'] = None
-    return redirect(url_for('index'))
-
-if __name__ == "__main__":
-    serve(app, host="0.0.0.0", port=5000)
