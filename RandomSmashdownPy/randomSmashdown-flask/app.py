@@ -1,9 +1,14 @@
 from flask import Flask, render_template, session, redirect, url_for, request
 import random
 from fighters import fighters
+import secrets
+import os
 
 app = Flask(__name__)
-app.secret_key = "your_secret_key"  # Change this for production!
+app.secret_key = os.environ.get("FLASK_SECRET_KEY", "dev_default_key")
+
+# Generate a random secret key
+print(secrets.token_urlsafe(32))
 
 @app.route("/", methods=["GET", "POST"])
 def index():
