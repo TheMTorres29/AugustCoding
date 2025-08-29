@@ -9,7 +9,7 @@
     <h1>Random Smashdown [ Flask ]</h1>
     {% if selected %}
         <div class="fighter-container">
-            <img src="{{  selected.icon  }}" alt="{{ selected.name }}" width="70">
+            <img src="{{  selected.icon  }}" alt="{{ selected.name }}" class="fighter-img">
             <h2>{{ selected.name }}</h2>
         </div>
     {% elif message %}
@@ -20,7 +20,7 @@
 
     {% if remaining %}
         <form method="post">
-            <button type="submit" class="RandomBtn">Randomize</button>
+            <button type="submit" class="RandomBtn">Random</button>
         </form>
     {% endif %}
 
