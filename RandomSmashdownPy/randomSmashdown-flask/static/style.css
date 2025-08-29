@@ -38,6 +38,6 @@ h2, h3 { margin-bottom: 0.2em; font-weight: 100; color:  rgba(255, 255, 255, 0.8
 }
 .history img { margin: 2px; border-radius: 8px; }
 @media (max-width: 500px) {
-    img { width: 20px !important; }
+    .fighter-img { width: 180px !important; }
     .history img { width: 24px !important; }
 }
