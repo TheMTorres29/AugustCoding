@@ -2,7 +2,7 @@ body { font-family: Impact, sans-serif; text-align: center; background-color: #1
 h1 { font-size: 2.5em; margin-bottom: 0.2em; font-weight: 100; color:  rgba(255, 255, 255, 0.87); }
 h2, h3 { margin-bottom: 0.2em; font-weight: 100; color:  rgba(255, 255, 255, 0.87); }
 .fighter-container { display: flex; flex-direction: column; align-items: center; margin: 0 auto; }
-.fighter-img { width: 120px; max-height: 100%;  object-fit: contain; }
+.fighter-img { width: 90px; max-height: 100%;  object-fit: contain; }
 .RandomBtn {
     background-color: #c9c9c5;
     border: none;
@@ -38,6 +38,6 @@ h2, h3 { margin-bottom: 0.2em; font-weight: 100; color:  rgba(255, 255, 255, 0.8
 }
 .history img { margin: 2px; border-radius: 8px; }
 @media (max-width: 500px) {
-    .fighter-img { width: 180px !important; }
+    .fighter-img { width: 100px !important; }
     .history img { width: 24px !important; }
 }

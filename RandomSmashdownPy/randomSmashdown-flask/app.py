@@ -7,9 +7,6 @@ import os
 app = Flask(__name__)
 app.secret_key = os.environ.get("FLASK_SECRET_KEY", "dev_default_key")
 
-# Generate a random secret key
-print(secrets.token_urlsafe(32))
-
 @app.route("/", methods=["GET", "POST"])
 def index():
     # Initialize session variables if not present
